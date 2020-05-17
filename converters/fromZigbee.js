@@ -1941,6 +1941,20 @@ const converters = {
             return result;
         },
     },
+    CNCDATACOLLECTOR_GEN: {
+        cluster: 'genBasic',
+        type: 'readResponse',
+        convert: (model, msg, publish, options, meta) => {
+            return {data: msg.data};
+        }
+    },
+    CNCDATACOLLECTOR_DATA: {
+        cluster: 'cncRealtime',
+        type: 'attributeReport',
+        convert: (model, msg, publish, options, meta) => {
+            return {data: msg.data};
+        }
+    },
     CC2530ROUTER_led: {
         cluster: 'genOnOff',
         type: ['attributeReport', 'readResponse'],

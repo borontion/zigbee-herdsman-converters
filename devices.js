@@ -2320,6 +2320,15 @@ const devices = [
 
     // Custom devices (DiY)
     {
+        zigbeeModel: ['algol.ed'],
+        model: 'algol.enddevice',
+        vernsor: 'Custom devices',
+        description: 'CNC data collector',
+        supports: 'state, description, type',
+        fromZigbee: [fz.CNCDATACOLLECTOR_DATA, fz.CNCDATACOLLECTOR_GEN],
+        toZigbee: [],
+    },
+    {
         zigbeeModel: ['lumi.router'],
         model: 'CC2530.ROUTER',
         vendor: 'Custom devices (DiY)',
