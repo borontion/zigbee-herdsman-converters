@@ -1952,7 +1952,31 @@ const converters = {
         cluster: 'cncRealtime',
         type: 'attributeReport',
         convert: (model, msg, publish, options, meta) => {
-            return {data: msg.data};
+            // format the published msg here
+            // remember to set cache_state to false
+            const payload = {};
+            payload['MachineID'] = options['friendly_name'];
+            payload['IEEEAddress'] = options['ID'];
+
+            const data = msg.data;
+            for (let key in data) {
+                const val = data[key];
+                if (typeof val == "string" && val.match(/^((\d+(\.\d+)?,*)+)$/)) {
+                    const numberList = val.split(',');
+                    let transferAttr;
+                    if (numberList.length == 1) {
+                        transferAttr = Number(numberList[0]);
+                    } else {
+                        transferAttr = [];
+                        for (let i in numberList) {
+                            transferAttr.push(Number(numberList[i]));
+                        }
+                    }
+                    data[key] = transferAttr;
+                }
+            }
+            payload['Attributes'] = data;
+            return payload;
         }
     },
     CC2530ROUTER_led: {
