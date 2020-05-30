@@ -1955,6 +1955,7 @@ const converters = {
             // format the published msg here
             // remember to set cache_state to false
             const payload = {};
+            payload['Timestamp'] = Date.now();
             payload['MachineID'] = options['friendly_name'];
             payload['IEEEAddress'] = options['ID'];
 
